@@ -18,7 +18,7 @@ html {
 body {
   margin: 0;
   background:
-    radial-gradient(circle at top, #252525 0%, #111 45%, #090909 100%);
+    radial-gradient(circle at top, #292929 0%, #111 45%, #080808 100%);
   color: #fff;
   font-family:
     -apple-system,
@@ -29,9 +29,9 @@ body {
 }
 
 .container {
-  width: min(920px, 92%);
+  width: min(980px, 94%);
   margin: 0 auto;
-  padding: 55px 0 70px;
+  padding: 48px 0 70px;
 }
 
 /* =========================
@@ -40,17 +40,41 @@ body {
 
 header {
   text-align: center;
-  margin-bottom: 42px;
+  margin-bottom: 40px;
+}
+
+/* 明日ジャケット画像を追加する場所 */
+.jacket {
+  width: min(360px, 78vw);
+  aspect-ratio: 1 / 1;
+  margin: 0 auto 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #151515;
+  border: 1px solid #333;
+  color: #555;
+  font-size: 11px;
+  letter-spacing: 3px;
+}
+
+.jacket img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  cursor: pointer;
 }
 
 .album-label {
   display: inline-block;
-  margin-bottom: 15px;
-  padding: 6px 14px;
+  margin-bottom: 14px;
+  padding: 6px 15px;
   border: 1px solid #555;
   border-radius: 999px;
   color: #aaa;
-  font-size: 11px;
+  font-size: 10px;
   letter-spacing: 3px;
 }
 
@@ -58,15 +82,15 @@ header h1 {
   margin: 0;
   font-size: clamp(30px, 7vw, 58px);
   line-height: 1.05;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   font-weight: 800;
 }
 
 header h1 span {
   display: block;
-  margin-top: 10px;
-  font-size: clamp(12px, 2vw, 15px);
+  margin-top: 12px;
   color: #888;
+  font-size: clamp(11px, 2vw, 14px);
   letter-spacing: 5px;
   font-weight: 400;
 }
@@ -83,21 +107,22 @@ header h1 span {
 }
 
 .disc-tab {
+  flex: 0 1 180px;
+  padding: 13px 25px;
   border: 1px solid #444;
+  border-radius: 8px;
   background: #181818;
   color: #888;
-  padding: 12px 28px;
-  border-radius: 8px;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   transition: all 0.25s ease;
 }
 
 .disc-tab:hover {
-  border-color: #777;
   color: #fff;
+  border-color: #777;
   transform: translateY(-1px);
 }
 
@@ -108,7 +133,7 @@ header h1 span {
 }
 
 /* =========================
-   TRACK LIST
+   DISC PANEL
 ========================= */
 
 .disc-panel {
@@ -125,6 +150,7 @@ header h1 span {
     opacity: 0;
     transform: translateY(5px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -135,50 +161,64 @@ header h1 span {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  margin-bottom: 10px;
-  padding-bottom: 14px;
+  margin-bottom: 8px;
+  padding: 0 4px 14px;
   border-bottom: 1px solid #444;
 }
 
 .disc-heading h2 {
   margin: 0;
-  font-size: 25px;
+  font-size: 24px;
   letter-spacing: 2px;
 }
 
 .disc-heading span {
   color: #666;
-  font-size: 12px;
+  font-size: 11px;
 }
 
+/* =========================
+   TRACK
+========================= */
+
 .track {
-  display: flex;
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr) 52px auto;
   align-items: center;
-  gap: 16px;
-  min-height: 72px;
-  padding: 13px 0;
-  border-bottom: 1px solid #252525;
+  gap: 12px;
+  min-height: 68px;
+  padding: 12px 4px;
+  border-bottom: 1px solid #242424;
+}
+
+.track:hover {
+  background: rgba(255,255,255,0.025);
 }
 
 .track-number {
-  width: 34px;
   color: #666;
   font-size: 12px;
   text-align: right;
-  flex-shrink: 0;
 }
 
 .track-title {
-  flex: 1;
   min-width: 0;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.4;
+}
+
+.track-time {
+  color: #777;
+  font-size: 12px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
 }
 
 .track-actions {
   display: flex;
+  flex-direction: row;
+  align-items: center;
   gap: 7px;
-  flex-shrink: 0;
 }
 
 /* =========================
@@ -189,13 +229,14 @@ header h1 span {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 104px;
+  min-width: 100px;
   padding: 9px 12px;
   border-radius: 7px;
   text-decoration: none;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.5px;
+  white-space: nowrap;
   transition:
     transform 0.2s ease,
     opacity 0.2s ease,
@@ -223,12 +264,11 @@ header h1 span {
 }
 
 /* =========================
-   BONUS
+   BONUS TRACK
 ========================= */
 
 .bonus {
   margin-top: 12px;
-  padding-top: 18px;
   border-top: 1px solid #555;
 }
 
@@ -240,32 +280,12 @@ header h1 span {
   font-weight: 700;
 }
 
-/* =========================
-   JACKET PLACEHOLDER
-   後から画像を追加できます
-========================= */
-
-.jacket {
-  width: min(360px, 75vw);
-  aspect-ratio: 1 / 1;
-  margin: 0 auto 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #333;
-  background: #151515;
-  color: #555;
-  text-align: center;
-  font-size: 12px;
-  letter-spacing: 2px;
-  overflow: hidden;
-}
-
-.jacket img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  cursor: pointer;
+.bonus-label {
+  display: inline-block;
+  margin-left: 7px;
+  color: #777;
+  font-size: 10px;
+  letter-spacing: 1px;
 }
 
 /* =========================
@@ -278,22 +298,31 @@ footer {
   border-top: 1px solid #222;
   text-align: center;
   color: #555;
-  font-size: 11px;
-  letter-spacing: 1px;
+  font-size: 10px;
+  letter-spacing: 2px;
 }
 
 /* =========================
    MOBILE
 ========================= */
 
-@media (max-width: 650px) {
+@media (max-width: 700px) {
 
   .container {
+    width: 94%;
     padding-top: 30px;
   }
 
   header {
     margin-bottom: 30px;
+  }
+
+  .jacket {
+    width: min(300px, 78vw);
+  }
+
+  header h1 {
+    font-size: clamp(27px, 8vw, 42px);
   }
 
   .disc-tabs {
@@ -306,34 +335,64 @@ footer {
   }
 
   .track {
-    align-items: flex-start;
-    gap: 9px;
-    padding: 14px 0;
+    grid-template-columns: 24px minmax(0, 1fr);
+    gap: 8px;
+    padding: 13px 2px;
   }
 
   .track-number {
-    width: 22px;
-    padding-top: 4px;
+    text-align: right;
+    padding-top: 3px;
   }
 
   .track-title {
-    padding-top: 3px;
     font-size: 13px;
   }
 
+  .track-time {
+    grid-column: 2;
+    grid-row: 2;
+    text-align: left;
+    margin-top: -4px;
+    font-size: 11px;
+  }
+
   .track-actions {
-    flex-direction: column;
+    grid-column: 2;
+    grid-row: 3;
+    justify-content: flex-start;
+    margin-top: 4px;
+  }
+
+  .btn {
+    min-width: 92px;
+    padding: 8px 9px;
+    font-size: 10px;
+  }
+
+  .bonus .track-actions {
+    margin-top: 4px;
+  }
+}
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 380px) {
+
+  .track-actions {
     gap: 5px;
   }
 
   .btn {
     min-width: 82px;
-    padding: 7px 6px;
-    font-size: 10px;
+    padding: 7px 7px;
+    font-size: 9px;
   }
 
-  .jacket {
-    width: min(300px, 80vw);
+  .track-title {
+    font-size: 12px;
   }
 }
 </style>
@@ -347,13 +406,15 @@ footer {
 
   <!--
     ジャケット画像は後からここに追加できます。
-    今は仮のスペースとして表示しています。
+    明日、画像を追加するときはこの部分を変更します。
   -->
   <div class="jacket">
     JACKET ARTWORK
   </div>
 
-  <div class="album-label">AI MUSIC COLLECTION</div>
+  <div class="album-label">
+    AI MUSIC COLLECTION
+  </div>
 
   <h1>
     NIGO's AI Sound Collection
@@ -362,37 +423,61 @@ footer {
 
 </header>
 
+
+<!-- =========================
+     DISC TABS
+========================= -->
+
 <div class="disc-tabs">
-  <button class="disc-tab active" onclick="showDisc(1)">
+
+  <button
+    class="disc-tab active"
+    onclick="showDisc(1)"
+  >
     DISC 1
   </button>
 
-  <button class="disc-tab" onclick="showDisc(2)">
+  <button
+    class="disc-tab"
+    onclick="showDisc(2)"
+  >
     DISC 2
   </button>
+
 </div>
+
+
+<!-- =========================
+     DISC 1
+========================= -->
 
 <div id="disc1" class="disc-panel active">
 
   <div class="disc-heading">
     <h2>DISC 1</h2>
-    <span>17 TRACKS</span>
+    <span>16 TRACKS + BONUS</span>
   </div>
 
   <div id="tracks1"></div>
 
 </div>
 
+
+<!-- =========================
+     DISC 2
+========================= -->
+
 <div id="disc2" class="disc-panel">
 
   <div class="disc-heading">
     <h2>DISC 2</h2>
-    <span>17 TRACKS</span>
+    <span>16 TRACKS + BONUS</span>
   </div>
 
   <div id="tracks2"></div>
 
 </div>
+
 
 <footer>
   NIGO's AI Sound Collection
@@ -400,221 +485,270 @@ footer {
 
 </div>
 
+
 <script>
+
+/* =========================
+   DISC 1 DATA
+========================= */
 
 const disc1 = [
 
   {
     no: "01",
     title: "ログアウト絆",
+    time: "4:10",
     id: "110M3VLjU8cc7SMSdJXO8HuztFsjiKhFJ"
   },
 
   {
     no: "02",
     title: "夏が呼んでる",
+    time: "3:43",
     id: "1DeCMgECUa4Op-V_g326CUdahJav0Qss6"
   },
 
   {
     no: "03",
     title: "いつもの話",
+    time: "2:57",
     id: "1s8BmjdXsEJr7yZoK3k8p4ajgVXZ6hIRy"
   },
 
   {
     no: "04",
     title: "Empathy",
+    time: "3:42",
     id: "1bL94B0ufGciH-2Tc3jUi6gY6U9h278oX"
   },
 
   {
     no: "05",
     title: "唐揚げ食べよう",
+    time: "2:13",
     id: "1-D6PBAyYFhMDuH-c_fCPFZ8gN3fyUr0K"
   },
 
   {
     no: "06",
     title: "百折不撓～HYAKUSETSU HUTOU～",
+    time: "4:46",
     id: "1sCsw4-orIh9Kdhr6mNxYMrc14H-N7YHN"
   },
 
   {
     no: "07",
     title: "精算☆カリメロディ♪",
+    time: "3:21",
     id: "1GqU3IWnsUL1NEogPYMs5EcuhZBOcjQYy"
   },
 
   {
     no: "08",
     title: "閉ざされた街で",
+    time: "4:38",
     id: "1eFCmr6Mn36ONL0-60K6_Xw6XNNEejRWu"
   },
 
   {
     no: "09",
     title: "オフ会しようぜ",
+    time: "4:03",
     id: "13qR8ehUYnVNbgvtddJuBKDBegsw1dYpB"
   },
 
   {
     no: "10",
     title: "Delicate & Bold",
+    time: "2:34",
     id: "1cO614pwnGamBog8Dp_72oRUQlA5E6yHz"
   },
 
   {
     no: "11",
     title: "贈られた言葉",
+    time: "4:29",
     id: "1qhfmMkBtknU6gx927qHPfHZYdkXRkB1A"
   },
 
   {
     no: "12",
     title: "ここにあるBIG LOVE",
+    time: "4:04",
     id: "1Co4AC4gZ18AGw548hFSxqFw1yOGUqYuW"
   },
 
   {
     no: "13",
     title: "夢のリズム",
+    time: "3:54",
     id: "15a9xzfHtUKkI9XBQBY_QWljh0uLa5kyT"
   },
 
   {
     no: "14",
     title: "リトラッシュ!!(Retry Rush)",
+    time: "2:40",
     id: "1tPP97vRuqbk60MHBfNYEusS39EOWZDuI"
   },
 
   {
     no: "15",
     title: "ポジティブでいこう",
+    time: "3:25",
     id: "1_ZOK6kORNgEzJg2fJzkVqAlr4k4Feb8Z"
   },
 
   {
     no: "16",
     title: "Nice Good friends",
+    time: "3:25",
     id: "1_8J4H1-1-bdfQ7NhX0Ks5nHlYsyLedOT"
   },
 
   {
     no: "★",
     title: "YAKEKUSO☆",
+    time: "1:41",
     id: "1Pmr087_IZUVQFqOC8U6XqKIuVg0OwfAV",
     bonus: true
   }
 
 ];
 
+
+/* =========================
+   DISC 2 DATA
+========================= */
+
 const disc2 = [
 
   {
     no: "01",
     title: "Everybody NIGO Party！",
+    time: "3:45",
     id: "1EnK0ysZgo7fFH_W4_8d6Gv0-kvPfeEml"
   },
 
   {
     no: "02",
     title: "限界シャウト",
+    time: "4:16",
     id: "1g9a35ZBH93zSwWU7OXNdy8EFmWmpaPtv"
   },
 
   {
     no: "03",
     title: "無理しないで",
+    time: "5:07",
     id: "1AAKSYbb2MPjoGpSsDnNdxWlzXWoUjFHt"
   },
 
   {
     no: "04",
     title: "YOFUKASHI",
+    time: "4:13",
     id: "1MV-HYlfn80OEyFWHdLjOTbbfV1uN-dtJ"
   },
 
   {
     no: "05",
     title: "君とSummerVoyage",
+    time: "4:49",
     id: "1RT62fNP1POeP6uPGVoIeQEYFjtRx1Mze"
   },
 
   {
     no: "06",
     title: "JUMP OUT！",
+    time: "3:25",
     id: "16Q7cN05-JZc8DGqlQZQ3gCFm1VvFCnsx"
   },
 
   {
     no: "07",
     title: "おちゃんちん",
+    time: "2:47",
     id: "1-7-Iba8ABKVC1AZhDBK5C33EHG6d1Wuk"
   },
 
   {
     no: "08",
     title: "サイバーロケットジェットファイア！",
+    time: "4:13",
     id: "1GN1xmXWB5C10GwK-9QuUWqXpKbGnI9Yp"
   },
 
   {
     no: "09",
     title: "繊細",
+    time: "5:15",
     id: "16GkWNhW-bXo3_8p1XAjcEBH6UXMwn7Qm"
   },
 
   {
     no: "10",
     title: "MAIDO EVERY NIGHT",
+    time: "3:10",
     id: "1Ybw33dO_hOysxnRkOV3BxWj3Y5gzP7Lm"
   },
 
   {
     no: "11",
     title: "Don’t expect 99",
+    time: "3:03",
     id: "15z4oilvYGCkMTPculdYRU-I9hdJY1YCk"
   },
 
   {
     no: "12",
     title: "Winter Lovers",
+    time: "4:08",
     id: "1h_UVskpqUPh37jJDQiDj3EuatlTaHhDB"
   },
 
   {
     no: "13",
     title: "踊れ黙示録",
+    time: "3:17",
     id: "1QyxywHXMGXnPcKqLJYQH-ydWX_D4DVNQ"
   },
 
   {
     no: "14",
     title: "明日の風",
+    time: "3:54",
     id: "1Js6P0RSjU_936GJDGWAoMxL0DcLJs5qR"
   },
 
   {
     no: "15",
     title: "DESIRE",
+    time: "4:19",
     id: "1KgjauNW2etoijri8UKSZx5k9e_5GpFy3"
   },
 
   {
     no: "16",
     title: "This is your life！",
+    time: "4:03",
     id: "1M4ghxqmd8URp4R1EaPhpx8yAJOEJg7pG"
   },
 
   {
     no: "★",
     title: "ふらっぐ ゴスペルver.",
+    time: "3:44",
     id: "13eCxh3g6lmHAD0j7DW2aOJyBfo4pe64d",
     bonus: true
   }
 
 ];
+
+
+/* =========================
+   CREATE TRACK
+========================= */
 
 function createTrack(track) {
 
@@ -642,7 +776,16 @@ function createTrack(track) {
 
     <span class="track-title">
       ${track.title}
-      ${track.bonus ? "<small> (Bonus Track)</small>" : ""}
+
+      ${
+        track.bonus
+          ? '<span class="bonus-label">BONUS TRACK</span>'
+          : ""
+      }
+    </span>
+
+    <span class="track-time">
+      ${track.time}
     </span>
 
     <div class="track-actions">
@@ -672,6 +815,11 @@ function createTrack(track) {
   return div;
 }
 
+
+/* =========================
+   RENDER TRACKS
+========================= */
+
 function renderTracks() {
 
   const container1 =
@@ -681,31 +829,44 @@ function renderTracks() {
     document.getElementById("tracks2");
 
   disc1.forEach(track => {
+
     container1.appendChild(
       createTrack(track)
     );
+
   });
 
   disc2.forEach(track => {
+
     container2.appendChild(
       createTrack(track)
     );
+
   });
 
 }
+
+
+/* =========================
+   DISC SWITCH
+========================= */
 
 function showDisc(number) {
 
   document
     .querySelectorAll(".disc-panel")
     .forEach(panel => {
+
       panel.classList.remove("active");
+
     });
 
   document
     .querySelectorAll(".disc-tab")
     .forEach(tab => {
+
       tab.classList.remove("active");
+
     });
 
   document
@@ -717,6 +878,11 @@ function showDisc(number) {
     .classList.add("active");
 
 }
+
+
+/* =========================
+   START
+========================= */
 
 renderTracks();
 
