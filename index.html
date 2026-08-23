@@ -20,6 +20,7 @@ body {
   margin: 0;
   min-height: 100vh;
   color: #172033;
+
   font-family:
     -apple-system,
     BlinkMacSystemFont,
@@ -31,8 +32,9 @@ body {
     background 0.5s ease;
 }
 
+
 /* ========================================
-   DISC 1 / DISC 2 BACKGROUND
+   BACKGROUND
 ======================================== */
 
 body.disc1 {
@@ -63,14 +65,16 @@ body.disc2 {
 
 
 /* ========================================
-   MAIN CONTAINER
+   CONTAINER
 ======================================== */
 
 .container {
 
-  width: min(960px, 94%);
+  width:
+    min(960px, 94%);
 
-  margin: 0 auto;
+  margin:
+    0 auto;
 
   padding:
     35px 0 60px;
@@ -84,9 +88,11 @@ body.disc2 {
 
 header {
 
-  text-align: center;
+  text-align:
+    center;
 
-  margin-bottom: 30px;
+  margin-bottom:
+    30px;
 
 }
 
@@ -100,17 +106,20 @@ header {
   width:
     min(360px, 78vw);
 
-  aspect-ratio: 1 / 1;
+  aspect-ratio:
+    1 / 1;
 
   margin:
     0 auto 25px;
 
-  overflow: hidden;
+  overflow:
+    hidden;
 
   border:
     3px solid rgba(255,255,255,0.9);
 
-  border-radius: 18px;
+  border-radius:
+    18px;
 
   background:
     rgba(255,255,255,0.35);
@@ -136,29 +145,35 @@ header {
 
 .jacket img {
 
-  width: 100%;
+  width:
+    100%;
 
-  height: 100%;
+  height:
+    100%;
 
-  display: block;
+  display:
+    block;
 
-  object-fit: cover;
+  object-fit:
+    cover;
 
 }
 
 
 /* ========================================
-   ALBUM LABEL
+   LABEL
 ======================================== */
 
 .album-label {
 
-  display: inline-block;
+  display:
+    inline-block;
 
   padding:
     7px 15px;
 
-  margin-bottom: 13px;
+  margin-bottom:
+    13px;
 
   border:
     1px solid rgba(255,255,255,0.8);
@@ -169,11 +184,14 @@ header {
   background:
     rgba(255,255,255,0.68);
 
-  font-size: 10px;
+  font-size:
+    10px;
 
-  letter-spacing: 3px;
+  letter-spacing:
+    3px;
 
-  font-weight: 700;
+  font-weight:
+    700;
 
 }
 
@@ -184,16 +202,20 @@ header {
 
 header h1 {
 
-  margin: 0;
+  margin:
+    0;
 
   font-size:
     clamp(29px, 6vw, 54px);
 
-  line-height: 1.05;
+  line-height:
+    1.05;
 
-  letter-spacing: 1px;
+  letter-spacing:
+    1px;
 
-  font-weight: 800;
+  font-weight:
+    800;
 
   text-shadow:
     0 2px 0 rgba(255,255,255,0.4);
@@ -202,18 +224,23 @@ header h1 {
 
 header h1 span {
 
-  display: block;
+  display:
+    block;
 
-  margin-top: 10px;
+  margin-top:
+    10px;
 
   font-size:
     clamp(10px, 2vw, 13px);
 
-  letter-spacing: 5px;
+  letter-spacing:
+    5px;
 
-  font-weight: 400;
+  font-weight:
+    400;
 
-  opacity: 0.65;
+  opacity:
+    0.65;
 
 }
 
@@ -224,13 +251,17 @@ header h1 span {
 
 .disc-tabs {
 
-  display: flex;
+  display:
+    flex;
 
-  justify-content: center;
+  justify-content:
+    center;
 
-  gap: 10px;
+  gap:
+    10px;
 
-  margin-bottom: 28px;
+  margin-bottom:
+    28px;
 
 }
 
@@ -320,7 +351,8 @@ header h1 span {
 
   from {
 
-    opacity: 0;
+    opacity:
+      0;
 
     transform:
       translateY(6px);
@@ -329,7 +361,8 @@ header h1 span {
 
   to {
 
-    opacity: 1;
+    opacity:
+      1;
 
     transform:
       translateY(0);
@@ -446,7 +479,7 @@ header h1 span {
 
 
 /* ========================================
-   TRACK NUMBER
+   NUMBER
 ======================================== */
 
 .track-number {
@@ -464,7 +497,7 @@ header h1 span {
 
 
 /* ========================================
-   TRACK TITLE
+   TITLE
 ======================================== */
 
 .track-title {
@@ -482,7 +515,7 @@ header h1 span {
 
 
 /* ========================================
-   TRACK TIME
+   TIME
 ======================================== */
 
 .track-time {
@@ -506,7 +539,7 @@ header h1 span {
 
 
 /* ========================================
-   ACTION BUTTONS
+   BUTTON AREA
 ======================================== */
 
 .track-actions {
@@ -524,6 +557,11 @@ header h1 span {
     6px;
 
 }
+
+
+/* ========================================
+   BUTTON
+======================================== */
 
 .btn {
 
@@ -601,7 +639,7 @@ header h1 span {
 
 
 /* ========================================
-   BONUS TRACK
+   BONUS
 ======================================== */
 
 .bonus {
@@ -625,22 +663,6 @@ header h1 span {
 
   font-weight:
     700;
-
-}
-
-.bonus-label {
-
-  margin-left:
-    6px;
-
-  font-size:
-    9px;
-
-  opacity:
-    0.55;
-
-  letter-spacing:
-    1px;
 
 }
 
@@ -730,9 +752,12 @@ footer {
   }
 
 
-  /* --------------------------------
-     1曲 = 2段構成
-  -------------------------------- */
+  /* ====================================
+     MOBILE TRACK
+     
+     左側の番号はそのまま。
+     曲名・時間・ボタンを右へ。
+  ==================================== */
 
   .track {
 
@@ -769,6 +794,14 @@ footer {
 
     grid-row:
       1;
+
+    /*
+      ここを広げて、
+      タイトルを右側へ寄せる
+    */
+
+    padding-left:
+      28px;
 
     font-size:
       13px;
@@ -819,6 +852,14 @@ footer {
 
     grid-row:
       2;
+
+    /*
+      タイトルと同じ位置から
+      ボタンも右へ移動
+    */
+
+    padding-left:
+      28px;
 
     justify-content:
       flex-start;
@@ -903,7 +944,7 @@ footer {
     <img
       id="jacketImage"
       src="disc1.jpg"
-      alt="NIGO's AI Sound Collection"
+      alt="NIGO's AI Sound Collection DISC 1"
     >
 
   </div>
@@ -1032,7 +1073,7 @@ footer {
 
 
 /* =====================================
-   DISC 1
+   DISC 1 DATA
 ===================================== */
 
 const disc1 = [
@@ -1161,7 +1202,7 @@ const disc1 = [
 
 
 /* =====================================
-   DISC 2
+   DISC 2 DATA
 ===================================== */
 
 const disc2 = [
@@ -1300,12 +1341,15 @@ function createTrack(track) {
     track.id +
     "/view?usp=drive_link";
 
+
   const downloadURL =
     "https://drive.google.com/uc?export=download&id=" +
     track.id;
 
+
   const div =
     document.createElement("div");
+
 
   div.className =
     track.bonus
@@ -1316,9 +1360,7 @@ function createTrack(track) {
   div.innerHTML = `
 
     <span class="track-number">
-
       ${track.no}
-
     </span>
 
 
@@ -1327,9 +1369,7 @@ function createTrack(track) {
       ${track.title}
 
       <span class="track-time">
-
         ${track.time}
-
       </span>
 
     </span>
@@ -1337,16 +1377,13 @@ function createTrack(track) {
 
     <div class="track-actions">
 
-
       <a
         class="btn play"
         href="${listenURL}"
         target="_blank"
         rel="noopener"
       >
-
         ▶ LISTEN
-
       </a>
 
 
@@ -1356,11 +1393,8 @@ function createTrack(track) {
         target="_blank"
         rel="noopener"
       >
-
         ↓ DOWNLOAD
-
       </a>
-
 
     </div>
 
@@ -1373,7 +1407,7 @@ function createTrack(track) {
 
 
 /* =====================================
-   RENDER TRACKS
+   RENDER
 ===================================== */
 
 function renderTracks() {
@@ -1470,8 +1504,13 @@ function showDisc(number) {
 
 
   window.scrollTo({
-    top: 0,
-    behavior: "smooth"
+
+    top:
+      0,
+
+    behavior:
+      "smooth"
+
   });
 
 }
