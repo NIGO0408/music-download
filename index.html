@@ -141,57 +141,6 @@ body.disc2::after {
 }
 
 
-/* ========================================
-   TRANSITION LIGHT
-======================================== */
-
-body.switching::before {
-
-  content: "";
-
-  position: fixed;
-
-  inset: 0;
-
-  z-index: 9000;
-
-  pointer-events: none;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(255,255,255,0.14),
-      rgba(255,255,255,0)
-    );
-
-  opacity: 0;
-
-  animation:
-    skyLight 1.6s ease;
-
-}
-
-
-@keyframes skyLight {
-
-  0% {
-    opacity: 0;
-  }
-
-  30% {
-    opacity: 0.20;
-  }
-
-  60% {
-    opacity: 0.06;
-  }
-
-  100% {
-    opacity: 0;
-  }
-
-}
-
 
 /* ========================================
    MAIN CONTAINER
@@ -2042,15 +1991,10 @@ function renderTracks() {
    DISC SWITCH
 ===================================== */
 
-let switching = false;
-
 
 function showDisc(number) {
 
-  if (switching) {
-    return;
-  }
-
+ 
 
   const currentDisc =
     document.body.classList.contains(
@@ -2065,7 +2009,6 @@ function showDisc(number) {
   }
 
 
-  switching = true;
 
 
   const jacketTrack =
@@ -2074,15 +2017,7 @@ function showDisc(number) {
     );
 
 
-  /* ==================================
-     START
-  ================================== */
-
-  document.body.classList.add(
-    "switching"
-  );
-
-
+  
   /* ==================================
      JACKET
      0.4秒
@@ -2171,22 +2106,7 @@ function showDisc(number) {
   }, 380);
 
 
-  /* ==================================
-     END
-     1.6秒
-  ================================== */
-
-  setTimeout(() => {
-
-    document.body.classList.remove(
-      "switching"
-    );
-
-    switching = false;
-
-  }, 1600);
-
-}
+  }
 
 
 /* =====================================
