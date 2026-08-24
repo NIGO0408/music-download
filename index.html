@@ -42,7 +42,8 @@ body {
     sans-serif;
 
   transition:
-    background 0.5s ease;
+    background 0.8s ease;
+
 }
 
 
@@ -74,6 +75,54 @@ body.disc2 {
       #ffd79b 72%,
       #fff0d5 100%
     );
+
+}
+
+
+/* ========================================
+   DISC TRANSITION
+======================================== */
+
+body.switching::before {
+
+  content: "";
+
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 9000;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0.35),
+      rgba(255,255,255,0)
+    );
+
+  opacity: 0;
+
+  animation:
+    skyFlash 0.75s ease;
+
+}
+
+
+@keyframes skyFlash {
+
+  0% {
+    opacity: 0;
+  }
+
+  35% {
+    opacity: 0.65;
+  }
+
+  100% {
+    opacity: 0;
+  }
 
 }
 
@@ -157,6 +206,24 @@ header {
 
   object-fit:
     cover;
+
+  opacity:
+    1;
+
+  transition:
+    opacity 0.45s ease,
+    transform 0.55s ease;
+
+}
+
+
+.jacket img.fade {
+
+  opacity:
+    0;
+
+  transform:
+    scale(1.025);
 
 }
 
@@ -243,6 +310,30 @@ header h1 span {
 
   opacity:
     0.65;
+
+}
+
+
+/* ========================================
+   ALBUM TOTAL
+======================================== */
+
+.album-total {
+
+  margin:
+    18px auto 0;
+
+  font-size:
+    10px;
+
+  letter-spacing:
+    2px;
+
+  font-weight:
+    700;
+
+  opacity:
+    0.55;
 
 }
 
@@ -340,9 +431,6 @@ header h1 span {
   display:
     none;
 
-  animation:
-    fadeIn 0.3s ease;
-
 }
 
 
@@ -351,10 +439,13 @@ header h1 span {
   display:
     block;
 
+  animation:
+    panelIn 0.5s ease;
+
 }
 
 
-@keyframes fadeIn {
+@keyframes panelIn {
 
   from {
 
@@ -362,7 +453,7 @@ header h1 span {
       0;
 
     transform:
-      translateY(6px);
+      translateY(10px);
 
   }
 
@@ -395,10 +486,24 @@ header h1 span {
     space-between;
 
   padding:
-    0 7px 13px;
+    0 7px 8px;
 
   border-bottom:
     2px solid rgba(255,255,255,0.70);
+
+}
+
+
+.disc-heading-main {
+
+  display:
+    flex;
+
+  align-items:
+    baseline;
+
+  gap:
+    12px;
 
 }
 
@@ -424,6 +529,30 @@ header h1 span {
 
   letter-spacing:
     2px;
+
+  opacity:
+    0.55;
+
+}
+
+
+/* ========================================
+   DISC TOTAL
+======================================== */
+
+.disc-total {
+
+  padding:
+    7px 7px 10px;
+
+  font-size:
+    10px;
+
+  letter-spacing:
+    1px;
+
+  font-weight:
+    700;
 
   opacity:
     0.55;
@@ -683,7 +812,7 @@ header h1 span {
 
 
 /* ========================================
-   DOWNLOAD NOTIFICATION
+   DOWNLOAD NOTICE
 ======================================== */
 
 .download-notice {
@@ -820,6 +949,17 @@ footer {
   }
 
 
+  .album-total {
+
+    margin-top:
+      15px;
+
+    font-size:
+      9px;
+
+  }
+
+
   .disc-tabs {
 
     gap:
@@ -835,6 +975,51 @@ footer {
 
     padding:
       11px 8px;
+
+  }
+
+
+  /* DISC heading */
+
+  .disc-heading {
+
+    padding-bottom:
+      7px;
+
+  }
+
+
+  .disc-heading-main {
+
+    gap:
+      7px;
+
+  }
+
+
+  .disc-heading h2 {
+
+    font-size:
+      21px;
+
+  }
+
+
+  .disc-heading span {
+
+    font-size:
+      9px;
+
+  }
+
+
+  .disc-total {
+
+    padding:
+      6px 5px 9px;
+
+    font-size:
+      9px;
 
   }
 
@@ -1113,6 +1298,13 @@ footer {
   </h1>
 
 
+  <div class="album-total">
+
+    2 DISCS · 34 TRACKS · TOTAL 2:07:13
+
+  </div>
+
+
 </header>
 
 
@@ -1158,13 +1350,24 @@ footer {
 
   <div class="disc-heading">
 
-    <h2>
-      DISC 1
-    </h2>
+    <div class="disc-heading-main">
 
-    <span>
-      BLUE SKY
-    </span>
+      <h2>
+        DISC 1
+      </h2>
+
+      <span>
+        BLUE SKY
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <div class="disc-total">
+
+    17 TRACKS · TOTAL 59:45
 
   </div>
 
@@ -1187,13 +1390,24 @@ footer {
 
   <div class="disc-heading">
 
-    <h2>
-      DISC 2
-    </h2>
+    <div class="disc-heading-main">
 
-    <span>
-      ORANGE SKY
-    </span>
+      <h2>
+        DISC 2
+      </h2>
+
+      <span>
+        ORANGE SKY
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <div class="disc-total">
+
+    17 TRACKS · TOTAL 1:07:28
 
   </div>
 
@@ -1501,10 +1715,10 @@ let noticeTimer = null;
 function showDownloadNotice(button) {
 
   const notice =
-    document.getElementById("downloadNotice");
+    document.getElementById(
+      "downloadNotice"
+    );
 
-
-  /* ボタンの表示を変更 */
 
   const originalText =
     button.dataset.originalText ||
@@ -1523,26 +1737,26 @@ function showDownloadNotice(button) {
     "0.7";
 
 
-  /* 通知を表示 */
+  notice.classList.add(
+    "show"
+  );
 
-  notice.classList.add("show");
-
-
-  /* 以前のタイマーがあれば解除 */
 
   if (noticeTimer) {
 
-    clearTimeout(noticeTimer);
+    clearTimeout(
+      noticeTimer
+    );
 
   }
 
 
-  /* 約2.5秒後に元へ戻す */
-
   noticeTimer =
     setTimeout(() => {
 
-      notice.classList.remove("show");
+      notice.classList.remove(
+        "show"
+      );
 
       button.textContent =
         originalText;
@@ -1577,15 +1791,11 @@ function createTrack(track) {
     track[4];
 
 
-  /* LISTEN */
-
   const listenURL =
     "https://drive.google.com/file/d/" +
     id +
     "/view?usp=drive_link";
 
-
-  /* DOWNLOAD */
 
   const downloadURL =
     "https://drive.usercontent.google.com/download?id=" +
@@ -1594,7 +1804,9 @@ function createTrack(track) {
 
 
   const div =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
 
 
   div.className =
@@ -1630,7 +1842,9 @@ function createTrack(track) {
         target="_blank"
         rel="noopener"
       >
+
         ▶ LISTEN
+
       </a>
 
 
@@ -1641,7 +1855,9 @@ function createTrack(track) {
         rel="noopener"
         download
       >
+
         ↓ DOWNLOAD
+
       </a>
 
 
@@ -1650,19 +1866,19 @@ function createTrack(track) {
   `;
 
 
-  /* =================================
-     DOWNLOAD CLICK
-  ================================= */
-
   const downloadButton =
-    div.querySelector(".download");
+    div.querySelector(
+      ".download"
+    );
 
 
   downloadButton.addEventListener(
     "click",
     function() {
 
-      showDownloadNotice(this);
+      showDownloadNotice(
+        this
+      );
 
     }
   );
@@ -1680,29 +1896,37 @@ function createTrack(track) {
 function renderTracks() {
 
   const container1 =
-    document.getElementById("tracks1");
+    document.getElementById(
+      "tracks1"
+    );
 
 
   const container2 =
-    document.getElementById("tracks2");
-
-
-  disc1.forEach(track => {
-
-    container1.appendChild(
-      createTrack(track)
+    document.getElementById(
+      "tracks2"
     );
 
-  });
+
+  disc1.forEach(
+    track => {
+
+      container1.appendChild(
+        createTrack(track)
+      );
+
+    }
+  );
 
 
-  disc2.forEach(track => {
+  disc2.forEach(
+    track => {
 
-    container2.appendChild(
-      createTrack(track)
-    );
+      container2.appendChild(
+        createTrack(track)
+      );
 
-  });
+    }
+  );
 
 }
 
@@ -1711,51 +1935,32 @@ function renderTracks() {
    DISC SWITCH
 ===================================== */
 
+let switching =
+  false;
+
+
 function showDisc(number) {
 
-
-  document
-    .querySelectorAll(".disc-panel")
-    .forEach(panel => {
-
-      panel.classList.remove(
-        "active"
-      );
-
-    });
+  if (switching) {
+    return;
+  }
 
 
-  document
-    .querySelectorAll(".disc-tab")
-    .forEach(tab => {
-
-      tab.classList.remove(
-        "active"
-      );
-
-    });
-
-
-  document
-    .getElementById(
-      "disc" + number
+  const currentDisc =
+    document.body.classList.contains(
+      "disc2"
     )
-    .classList.add(
-      "active"
-    );
+      ? 2
+      : 1;
 
 
-  document
-    .querySelectorAll(
-      ".disc-tab"
-    )[number - 1]
-    .classList.add(
-      "active"
-    );
+  if (currentDisc === number) {
+    return;
+  }
 
 
-  document.body.className =
-    "disc" + number;
+  switching =
+    true;
 
 
   const jacket =
@@ -1764,36 +1969,139 @@ function showDisc(number) {
     );
 
 
-  if (number === 1) {
+  /* 空の切り替え演出 */
 
-    jacket.src =
-      "disc1.jpg";
-
-    jacket.alt =
-      "NIGO's AI Sound Collection DISC 1";
-
-  }
-
-  else {
-
-    jacket.src =
-      "disc2.jpg";
-
-    jacket.alt =
-      "NIGO's AI Sound Collection DISC 2";
-
-  }
+  document.body.classList.add(
+    "switching"
+  );
 
 
-  window.scrollTo({
+  /* ジャケットをフェードアウト */
 
-    top:
-      0,
+  jacket.classList.add(
+    "fade"
+  );
 
-    behavior:
-      "smooth"
 
-  });
+  setTimeout(() => {
+
+
+    /* パネル切り替え */
+
+    document
+      .querySelectorAll(
+        ".disc-panel"
+      )
+      .forEach(
+        panel => {
+
+          panel.classList.remove(
+            "active"
+          );
+
+        }
+      );
+
+
+    document
+      .querySelectorAll(
+        ".disc-tab"
+      )
+      .forEach(
+        tab => {
+
+          tab.classList.remove(
+            "active"
+          );
+
+        }
+      );
+
+
+    document
+      .getElementById(
+        "disc" + number
+      )
+      .classList.add(
+        "active"
+      );
+
+
+    document
+      .querySelectorAll(
+        ".disc-tab"
+      )[number - 1]
+      .classList.add(
+        "active"
+      );
+
+
+    /* 背景切り替え */
+
+    document.body.className =
+      "disc" + number;
+
+
+    /* ジャケット切り替え */
+
+    if (number === 1) {
+
+      jacket.src =
+        "disc1.jpg";
+
+      jacket.alt =
+        "NIGO's AI Sound Collection DISC 1";
+
+    }
+
+    else {
+
+      jacket.src =
+        "disc2.jpg";
+
+      jacket.alt =
+        "NIGO's AI Sound Collection DISC 2";
+
+    }
+
+
+    /* 新しいジャケットを表示 */
+
+    setTimeout(() => {
+
+      jacket.classList.remove(
+        "fade"
+      );
+
+    }, 80);
+
+
+    /* ページ上部へ */
+
+    window.scrollTo({
+
+      top:
+        0,
+
+      behavior:
+        "smooth"
+
+    });
+
+
+  }, 320);
+
+
+  setTimeout(() => {
+
+    document.body.classList.remove(
+      "switching"
+    );
+
+    switching =
+      false;
+
+  }, 800);
 
 }
 
