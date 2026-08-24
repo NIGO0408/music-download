@@ -42,7 +42,7 @@ body {
     sans-serif;
 
   transition:
-    background 0.8s ease;
+    background 1.8s ease;
 
 }
 
@@ -80,7 +80,7 @@ body.disc2 {
 
 
 /* ========================================
-   DISC TRANSITION
+   DISC TRANSITION LIGHT
 ======================================== */
 
 body.switching::before {
@@ -98,26 +98,30 @@ body.switching::before {
   background:
     linear-gradient(
       180deg,
-      rgba(255,255,255,0.35),
+      rgba(255,255,255,0.22),
       rgba(255,255,255,0)
     );
 
   opacity: 0;
 
   animation:
-    skyFlash 0.75s ease;
+    skyLight 1.8s ease;
 
 }
 
 
-@keyframes skyFlash {
+@keyframes skyLight {
 
   0% {
     opacity: 0;
   }
 
   35% {
-    opacity: 0.65;
+    opacity: 0.35;
+  }
+
+  65% {
+    opacity: 0.12;
   }
 
   100% {
@@ -161,7 +165,7 @@ header {
 
 
 /* ========================================
-   JACKET
+   JACKET VIEWPORT
 ======================================== */
 
 .jacket {
@@ -178,6 +182,9 @@ header {
   overflow:
     hidden;
 
+  position:
+    relative;
+
   border:
     3px solid rgba(255,255,255,0.9);
 
@@ -193,37 +200,68 @@ header {
 }
 
 
-.jacket img {
+/* ========================================
+   JACKET SLIDE TRACK
+======================================== */
+
+.jacket-track {
+
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  display:
+    flex;
 
   width:
-    100%;
+    200%;
+
+  transform:
+    translateX(0);
+
+  transition:
+    transform 0.75s cubic-bezier(
+      0.65,
+      0,
+      0.35,
+      1
+    );
+
+}
+
+
+/* DISC 2 POSITION */
+
+.jacket-track.show-disc2 {
+
+  transform:
+    translateX(-50%);
+
+}
+
+
+/* ========================================
+   JACKET IMAGE
+======================================== */
+
+.jacket-image {
+
+  width:
+    50%;
 
   height:
     100%;
+
+  flex:
+    0 0 50%;
 
   display:
     block;
 
   object-fit:
     cover;
-
-  opacity:
-    1;
-
-  transition:
-    opacity 0.45s ease,
-    transform 0.55s ease;
-
-}
-
-
-.jacket img.fade {
-
-  opacity:
-    0;
-
-  transform:
-    scale(1.025);
 
 }
 
@@ -440,7 +478,7 @@ header h1 span {
     block;
 
   animation:
-    panelIn 0.5s ease;
+    panelIn 0.55s ease;
 
 }
 
@@ -1271,11 +1309,24 @@ footer {
 
   <div class="jacket">
 
-    <img
-      id="jacketImage"
-      src="disc1.jpg"
-      alt="NIGO's AI Sound Collection DISC 1"
+    <div
+      id="jacketTrack"
+      class="jacket-track"
     >
+
+      <img
+        class="jacket-image"
+        src="disc1.jpg"
+        alt="NIGO's AI Sound Collection DISC 1"
+      >
+
+      <img
+        class="jacket-image"
+        src="disc2.jpg"
+        alt="NIGO's AI Sound Collection DISC 2"
+      >
+
+    </div>
 
   </div>
 
@@ -1963,30 +2014,62 @@ function showDisc(number) {
     true;
 
 
-  const jacket =
+  const jacketTrack =
     document.getElementById(
-      "jacketImage"
+      "jacketTrack"
     );
 
 
-  /* 空の切り替え演出 */
+  /* ==================================
+     TRANSITION START
+  ================================== */
 
   document.body.classList.add(
     "switching"
   );
 
 
-  /* ジャケットをフェードアウト */
+  /*
+     DISC 1 → DISC 2
+     ジャケットは左へスライド
 
-  jacket.classList.add(
-    "fade"
-  );
+     DISC 2 → DISC 1
+     ジャケットは右へスライド
+  */
 
+  if (number === 2) {
+
+    jacketTrack.classList.add(
+      "show-disc2"
+    );
+
+  }
+
+  else {
+
+    jacketTrack.classList.remove(
+      "show-disc2"
+    );
+
+  }
+
+
+  /*
+     背景色はCSSの
+     1.8秒transitionで
+     ゆっくり変化
+  */
+
+  document.body.className =
+    "disc" + number + " switching";
+
+
+  /* ==================================
+     パネル切り替え
+  ================================== */
 
   setTimeout(() => {
 
-
-    /* パネル切り替え */
 
     document
       .querySelectorAll(
@@ -2036,72 +2119,27 @@ function showDisc(number) {
       );
 
 
-    /* 背景切り替え */
-
-    document.body.className =
-      "disc" + number;
+  }, 380);
 
 
-    /* ジャケット切り替え */
-
-    if (number === 1) {
-
-      jacket.src =
-        "disc1.jpg";
-
-      jacket.alt =
-        "NIGO's AI Sound Collection DISC 1";
-
-    }
-
-    else {
-
-      jacket.src =
-        "disc2.jpg";
-
-      jacket.alt =
-        "NIGO's AI Sound Collection DISC 2";
-
-    }
-
-
-    /* 新しいジャケットを表示 */
-
-    setTimeout(() => {
-
-      jacket.classList.remove(
-        "fade"
-      );
-
-    }, 80);
-
-
-    /* ページ上部へ */
-
-    window.scrollTo({
-
-      top:
-        0,
-
-      behavior:
-        "smooth"
-
-    });
-
-
-  }, 320);
-
+  /* ==================================
+     TRANSITION END
+  ================================== */
 
   setTimeout(() => {
+
 
     document.body.classList.remove(
       "switching"
     );
 
+
     switching =
       false;
 
-  }, 800);
+
+  }, 1800);
+
 
 }
 
