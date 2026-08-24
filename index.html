@@ -3,1364 +3,541 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>NIGO's AI Sound Collection</title>
 
 <style>
+*{box-sizing:border-box}
 
-* {
-  box-sizing: border-box;
+html{scroll-behavior:smooth}
+
+body{
+  margin:0;
+  min-height:100vh;
+  color:#172033;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;
+  transition:background .5s ease;
 }
 
-html {
-  scroll-behavior: smooth;
+body.disc1{
+  background:linear-gradient(180deg,#38aef0 0%,#72cef4 35%,#c9f0ff 72%,#f3fbff 100%);
 }
 
-body {
-  margin: 0;
-  min-height: 100vh;
-  color: #172033;
-
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    "Noto Sans JP",
-    sans-serif;
-
-  transition:
-    background 0.5s ease;
+body.disc2{
+  background:linear-gradient(180deg,#f6a62d 0%,#f8bd57 35%,#ffd79b 72%,#fff0d5 100%);
 }
 
-
-/* ========================================
-   BACKGROUND
-======================================== */
-
-body.disc1 {
-
-  background:
-    linear-gradient(
-      180deg,
-      #38aef0 0%,
-      #72cef4 35%,
-      #c9f0ff 72%,
-      #f3fbff 100%
-    );
-
+.container{
+  width:min(960px,94%);
+  margin:0 auto;
+  padding:35px 0 60px;
 }
 
-body.disc2 {
-
-  background:
-    linear-gradient(
-      180deg,
-      #f6a62d 0%,
-      #f8bd57 35%,
-      #ffd79b 72%,
-      #fff0d5 100%
-    );
-
+header{
+  text-align:center;
+  margin-bottom:30px;
 }
 
-
-/* ========================================
-   CONTAINER
-======================================== */
-
-.container {
-
-  width:
-    min(960px, 94%);
-
-  margin:
-    0 auto;
-
-  padding:
-    35px 0 60px;
-
+.jacket{
+  width:min(360px,78vw);
+  aspect-ratio:1/1;
+  margin:0 auto 25px;
+  overflow:hidden;
+  border:3px solid rgba(255,255,255,.9);
+  border-radius:18px;
+  background:rgba(255,255,255,.35);
+  box-shadow:0 15px 35px rgba(30,70,100,.20);
 }
 
-
-/* ========================================
-   HEADER
-======================================== */
-
-header {
-
-  text-align:
-    center;
-
-  margin-bottom:
-    30px;
-
+.jacket img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
 }
 
-
-/* ========================================
-   JACKET
-======================================== */
-
-.jacket {
-
-  width:
-    min(360px, 78vw);
-
-  aspect-ratio:
-    1 / 1;
-
-  margin:
-    0 auto 25px;
-
-  overflow:
-    hidden;
-
-  border:
-    3px solid rgba(255,255,255,0.9);
-
-  border-radius:
-    18px;
-
-  background:
-    rgba(255,255,255,0.35);
-
-  box-shadow:
-    0 15px 35px rgba(30,70,100,0.20);
-
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
-
+.album-label{
+  display:inline-block;
+  padding:7px 15px;
+  margin-bottom:13px;
+  border:1px solid rgba(255,255,255,.8);
+  border-radius:999px;
+  background:rgba(255,255,255,.68);
+  font-size:10px;
+  letter-spacing:3px;
+  font-weight:700;
 }
 
-.jacket:hover {
-
-  transform:
-    translateY(-3px);
-
-  box-shadow:
-    0 20px 40px rgba(30,70,100,0.25);
-
+header h1{
+  margin:0;
+  font-size:clamp(29px,6vw,54px);
+  line-height:1.05;
+  letter-spacing:1px;
+  font-weight:800;
+  text-shadow:0 2px 0 rgba(255,255,255,.4);
 }
 
-.jacket img {
-
-  width:
-    100%;
-
-  height:
-    100%;
-
-  display:
-    block;
-
-  object-fit:
-    cover;
-
+header h1 span{
+  display:block;
+  margin-top:10px;
+  font-size:clamp(10px,2vw,13px);
+  letter-spacing:5px;
+  font-weight:400;
+  opacity:.65;
 }
 
-
-/* ========================================
-   LABEL
-======================================== */
-
-.album-label {
-
-  display:
-    inline-block;
-
-  padding:
-    7px 15px;
-
-  margin-bottom:
-    13px;
-
-  border:
-    1px solid rgba(255,255,255,0.8);
-
-  border-radius:
-    999px;
-
-  background:
-    rgba(255,255,255,0.68);
-
-  font-size:
-    10px;
-
-  letter-spacing:
-    3px;
-
-  font-weight:
-    700;
-
+.disc-tabs{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin-bottom:28px;
 }
 
-
-/* ========================================
-   TITLE
-======================================== */
-
-header h1 {
-
-  margin:
-    0;
-
-  font-size:
-    clamp(29px, 6vw, 54px);
-
-  line-height:
-    1.05;
-
-  letter-spacing:
-    1px;
-
-  font-weight:
-    800;
-
-  text-shadow:
-    0 2px 0 rgba(255,255,255,0.4);
-
+.disc-tab{
+  flex:0 1 190px;
+  padding:13px 20px;
+  border:2px solid rgba(255,255,255,.75);
+  border-radius:10px;
+  background:rgba(255,255,255,.38);
+  color:#172033;
+  cursor:pointer;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:2px;
+  box-shadow:0 5px 15px rgba(30,60,90,.10);
+  transition:all .25s ease;
 }
 
-header h1 span {
-
-  display:
-    block;
-
-  margin-top:
-    10px;
-
-  font-size:
-    clamp(10px, 2vw, 13px);
-
-  letter-spacing:
-    5px;
-
-  font-weight:
-    400;
-
-  opacity:
-    0.65;
-
+.disc-tab:hover{
+  transform:translateY(-2px);
+  background:rgba(255,255,255,.65);
 }
 
-
-/* ========================================
-   DISC TABS
-======================================== */
-
-.disc-tabs {
-
-  display:
-    flex;
-
-  justify-content:
-    center;
-
-  gap:
-    10px;
-
-  margin-bottom:
-    28px;
-
+.disc-tab.active{
+  background:rgba(255,255,255,.94);
+  transform:translateY(-2px);
 }
 
-.disc-tab {
-
-  flex:
-    0 1 190px;
-
-  padding:
-    13px 20px;
-
-  border:
-    2px solid rgba(255,255,255,0.75);
-
-  border-radius:
-    10px;
-
-  background:
-    rgba(255,255,255,0.38);
-
-  color:
-    #172033;
-
-  cursor:
-    pointer;
-
-  font-size:
-    12px;
-
-  font-weight:
-    800;
-
-  letter-spacing:
-    2px;
-
-  box-shadow:
-    0 5px 15px rgba(30,60,90,0.10);
-
-  transition:
-    all 0.25s ease;
-
+.disc-panel{
+  display:none;
+  animation:fadeIn .3s ease;
 }
 
-.disc-tab:hover {
-
-  transform:
-    translateY(-2px);
-
-  background:
-    rgba(255,255,255,0.65);
-
+.disc-panel.active{
+  display:block;
 }
 
-.disc-tab.active {
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(6px)}
+  to{opacity:1;transform:translateY(0)}
+}
 
-  background:
-    rgba(255,255,255,0.94);
+.disc-heading{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  padding:0 7px 13px;
+  border-bottom:2px solid rgba(255,255,255,.70);
+}
 
-  transform:
-    translateY(-2px);
+.disc-heading h2{
+  margin:0;
+  font-size:24px;
+  letter-spacing:2px;
+}
 
+.disc-heading span{
+  font-size:10px;
+  letter-spacing:2px;
+  opacity:.55;
+}
+
+.track{
+  display:grid;
+  grid-template-columns:34px minmax(0,1fr) auto;
+  align-items:center;
+  gap:10px;
+  min-height:67px;
+  padding:11px 10px;
+  margin:5px 0;
+  border:1px solid rgba(255,255,255,.70);
+  border-radius:10px;
+  background:rgba(255,255,255,.58);
+  box-shadow:0 3px 10px rgba(40,60,80,.06);
+  transition:transform .2s ease,background .2s ease;
+}
+
+.track:hover{
+  transform:translateY(-1px);
+  background:rgba(255,255,255,.75);
+}
+
+.track-number{
+  font-size:11px;
+  opacity:.55;
+  text-align:right;
+}
+
+.track-title{
+  min-width:0;
+  font-size:14px;
+  line-height:1.4;
+}
+
+.track-time{
+  display:inline;
+  margin-left:6px;
+  font-size:12px;
+  opacity:.55;
+  white-space:nowrap;
+}
+
+.track-actions{
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  gap:6px;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:94px;
+  padding:9px 10px;
+  border-radius:7px;
+  text-decoration:none;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.4px;
+  white-space:nowrap;
+  transition:transform .2s ease,opacity .2s ease;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+  opacity:.85;
+}
+
+.play{
+  background:#fff;
+  color:#172033;
+  box-shadow:0 3px 8px rgba(0,0,0,.08);
+}
+
+.download{
+  background:rgba(30,45,65,.82);
+  color:#fff;
+}
+
+.bonus{
+  margin-top:12px;
+  border-style:dashed;
+}
+
+.bonus .track-number,
+.bonus .track-title{
+  font-weight:700;
+}
+
+footer{
+  margin-top:35px;
+  padding-top:20px;
+  border-top:1px solid rgba(255,255,255,.4);
+  text-align:center;
+  font-size:9px;
+  letter-spacing:2px;
+  opacity:.5;
 }
 
 
-/* ========================================
-   DISC PANELS
-======================================== */
-
-.disc-panel {
-
-  display:
-    none;
-
-  animation:
-    fadeIn 0.3s ease;
-
-}
-
-.disc-panel.active {
-
-  display:
-    block;
-
-}
-
-@keyframes fadeIn {
-
-  from {
-
-    opacity:
-      0;
-
-    transform:
-      translateY(6px);
-
-  }
-
-  to {
-
-    opacity:
-      1;
-
-    transform:
-      translateY(0);
-
-  }
-
-}
-
-
-/* ========================================
-   DISC HEADING
-======================================== */
-
-.disc-heading {
-
-  display:
-    flex;
-
-  align-items:
-    baseline;
-
-  justify-content:
-    space-between;
-
-  padding:
-    0 7px 13px;
-
-  border-bottom:
-    2px solid rgba(255,255,255,0.70);
-
-}
-
-.disc-heading h2 {
-
-  margin:
-    0;
-
-  font-size:
-    24px;
-
-  letter-spacing:
-    2px;
-
-}
-
-.disc-heading span {
-
-  font-size:
-    10px;
-
-  letter-spacing:
-    2px;
-
-  opacity:
-    0.55;
-
-}
-
-
-/* ========================================
-   TRACK
-======================================== */
-
-.track {
-
-  display:
-    grid;
-
-  grid-template-columns:
-    34px minmax(0,1fr) auto;
-
-  align-items:
-    center;
-
-  gap:
-    10px;
-
-  min-height:
-    67px;
-
-  padding:
-    11px 10px;
-
-  margin:
-    5px 0;
-
-  border:
-    1px solid rgba(255,255,255,0.70);
-
-  border-radius:
-    10px;
-
-  background:
-    rgba(255,255,255,0.58);
-
-  box-shadow:
-    0 3px 10px rgba(40,60,80,0.06);
-
-  transition:
-    transform 0.2s ease,
-    background 0.2s ease;
-
-}
-
-.track:hover {
-
-  transform:
-    translateY(-1px);
-
-  background:
-    rgba(255,255,255,0.75);
-
-}
-
-
-/* ========================================
-   NUMBER
-======================================== */
-
-.track-number {
-
-  font-size:
-    11px;
-
-  opacity:
-    0.55;
-
-  text-align:
-    right;
-
-}
-
-
-/* ========================================
-   TITLE
-======================================== */
-
-.track-title {
-
-  min-width:
-    0;
-
-  font-size:
-    14px;
-
-  line-height:
-    1.4;
-
-}
-
-
-/* ========================================
-   TIME
-======================================== */
-
-.track-time {
-
-  display:
-    inline;
-
-  margin-left:
-    6px;
-
-  font-size:
-    12px;
-
-  opacity:
-    0.55;
-
-  white-space:
-    nowrap;
-
-}
-
-
-/* ========================================
-   BUTTON AREA
-======================================== */
-
-.track-actions {
-
-  display:
-    flex;
-
-  flex-direction:
-    row;
-
-  align-items:
-    center;
-
-  gap:
-    6px;
-
-}
-
-
-/* ========================================
-   BUTTON
-======================================== */
-
-.btn {
-
-  display:
-    inline-flex;
-
-  align-items:
-    center;
-
-  justify-content:
-    center;
-
-  min-width:
-    94px;
-
-  padding:
-    9px 10px;
-
-  border-radius:
-    7px;
-
-  text-decoration:
-    none;
-
-  font-size:
-    10px;
-
-  font-weight:
-    800;
-
-  letter-spacing:
-    0.4px;
-
-  white-space:
-    nowrap;
-
-  transition:
-    transform 0.2s ease,
-    opacity 0.2s ease;
-
-}
-
-.btn:hover {
-
-  transform:
-    translateY(-2px);
-
-  opacity:
-    0.85;
-
-}
-
-.play {
-
-  background:
-    #ffffff;
-
-  color:
-    #172033;
-
-  box-shadow:
-    0 3px 8px rgba(0,0,0,0.08);
-
-}
-
-.download {
-
-  background:
-    rgba(30,45,65,0.82);
-
-  color:
-    #ffffff;
-
-}
-
-
-/* ========================================
-   BONUS
-======================================== */
-
-.bonus {
-
-  margin-top:
-    12px;
-
-  border-style:
-    dashed;
-
-}
-
-.bonus .track-number {
-
-  font-weight:
-    800;
-
-}
-
-.bonus .track-title {
-
-  font-weight:
-    700;
-
-}
-
-
-/* ========================================
-   FOOTER
-======================================== */
-
-footer {
-
-  margin-top:
-    35px;
-
-  padding-top:
-    20px;
-
-  border-top:
-    1px solid rgba(255,255,255,0.4);
-
-  text-align:
-    center;
-
-  font-size:
-    9px;
-
-  letter-spacing:
-    2px;
-
-  opacity:
-    0.5;
-
-}
-
-
-/* ========================================
+/* ================================
    SMARTPHONE
-======================================== */
+================================ */
 
-@media (max-width: 700px) {
+@media(max-width:700px){
 
-  .container {
-    width: 94%;
-    padding-top: 24px;
+  .container{
+    width:94%;
+    padding-top:24px;
   }
 
-  .jacket {
-    width: min(300px, 78vw);
-    border-radius: 14px;
+  .jacket{
+    width:min(300px,78vw);
+    border-radius:14px;
   }
 
-  header h1 {
-    font-size: clamp(27px, 8vw, 42px);
+  header h1{
+    font-size:clamp(27px,8vw,42px);
   }
 
-  .disc-tabs {
-    gap: 7px;
+  .disc-tabs{
+    gap:7px;
   }
 
-  .disc-tab {
-    flex: 1;
-    padding: 11px 8px;
+  .disc-tab{
+    flex:1;
+    padding:11px 8px;
   }
 
-
-  /* ==============================
-     スマホ：曲情報
-  ============================== */
-
-  .track {
-
-    display: grid;
-
-    grid-template-columns:
-      25px minmax(0, 1fr);
-
-    grid-template-rows:
-      auto auto;
-
-    gap: 4px 7px;
-
-    padding: 11px 8px;
-
+  .track{
+    display:grid;
+    grid-template-columns:25px minmax(0,1fr);
+    grid-template-rows:auto auto;
+    gap:4px 7px;
+    padding:11px 8px;
   }
-
 
   /* 曲番号 */
+  .track-number{
+    grid-column:1;
+    grid-row:1;
+    padding-top:2px;
+    font-size:13px;
+    color:#000;
+    opacity:1;
+    text-align:right;
+  }
 
-  .track-number {
-
-  grid-column: 1;
-  grid-row: 1;
-
-  padding-top: 2px;
-
-  font-size: 13px;
-
-  color: #000000;
-
-  text-align: right;
-
-}
-
-
-  /* 曲名＋時間 */
-
-  .track-title {
-
-  grid-column: 2;
-  grid-row: 1;
-
-  padding-left: 0;
-
-  font-size: 15px;
-
-  line-height: 1.4;
-
-  text-align: left;
-
-  white-space: nowrap;
-
-  overflow: hidden;
-
-  text-overflow: ellipsis;
-
-}
-
+  /* 曲名 */
+  .track-title{
+    grid-column:2;
+    grid-row:1;
+    padding-left:0;
+    font-size:15px;
+    line-height:1.4;
+    text-align:left;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
 
   /* 再生時間 */
-
-  .track-time {
-
-    margin-left: 5px;
-
-    font-size: 11px;
-
+  .track-time{
+    margin-left:5px;
+    font-size:11px;
+    opacity:.55;
   }
 
-  .track-time::before {
-    content: "(";
+  .track-time::before{
+    content:"(";
   }
 
-  .track-time::after {
-    content: ")";
+  .track-time::after{
+    content:")";
   }
 
-
-  /* ==============================
-     LISTEN / DOWNLOAD
-     → 中央配置
-  ============================== */
-
-  .track-actions {
-
-    grid-column: 1 / 3;
-
-    grid-row: 2;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    gap: 14px;
-
-    width: 100%;
-
-    margin-top: 3px;
-
-    padding-left: 0;
-
+  /* ボタン */
+  .track-actions{
+    grid-column:1 / 3;
+    grid-row:2;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:14px;
+    width:100%;
+    margin-top:3px;
+    padding-left:0;
   }
 
-
-  .btn {
-
-    min-width: 90px;
-
-    padding: 8px 9px;
-
-    font-size: 9px;
-
+  .btn{
+    min-width:90px;
+    padding:8px 9px;
+    font-size:9px;
   }
-
 }
 
 
-/* ==============================
-   小さいスマホ
-============================== */
-
-@media (max-width: 380px) {
-
-  .track-title {
-    font-size: 12px;
-  }
-
-  .track-actions {
-    gap: 12px;
-  }
-
-  .btn {
-    min-width: 82px;
-    padding: 7px 7px;
-    font-size: 9px;
-  }
-
-}
-
-
-/* ========================================
+/* ================================
    SMALL SMARTPHONE
-======================================== */
+================================ */
 
-@media (max-width: 380px) {
+@media(max-width:380px){
 
-  .track-title {
-
-    font-size:
-      12px;
-
+  .track-title{
+    font-size:14px;
   }
 
-  .track-actions {
-
-    gap:
-      5px;
-
+  .track-actions{
+    gap:12px;
   }
 
-  .btn {
-
-    min-width:
-      82px;
-
-    padding:
-      7px 7px;
-
-    font-size:
-      9px;
-
+  .btn{
+    min-width:82px;
+    padding:7px;
+    font-size:9px;
   }
 
 }
-
 </style>
-
 </head>
-
 
 <body class="disc1">
 
-
 <div class="container">
-
-
-<!-- =====================================
-     HEADER
-===================================== -->
 
 <header>
 
-
   <div class="jacket">
-
     <img
       id="jacketImage"
       src="disc1.jpg"
       alt="NIGO's AI Sound Collection DISC 1"
     >
-
   </div>
-
 
   <div class="album-label">
-
     AI MUSIC COLLECTION
-
   </div>
 
-
   <h1>
-
     NIGO's AI Sound Collection
-
-    <span>
-      ORIGINAL MUSIC COLLECTION
-    </span>
-
+    <span>ORIGINAL MUSIC COLLECTION</span>
   </h1>
-
 
 </header>
 
 
-<!-- =====================================
-     DISC TABS
-===================================== -->
-
 <div class="disc-tabs">
 
-
-  <button
-    class="disc-tab active"
-    onclick="showDisc(1)"
-  >
-
+  <button class="disc-tab active" onclick="showDisc(1)">
     DISC 1
-
   </button>
 
-
-  <button
-    class="disc-tab"
-    onclick="showDisc(2)"
-  >
-
+  <button class="disc-tab" onclick="showDisc(2)">
     DISC 2
-
   </button>
-
 
 </div>
 
 
-<!-- =====================================
-     DISC 1
-===================================== -->
-
-<section
-  id="disc1"
-  class="disc-panel active"
->
-
+<section id="disc1" class="disc-panel active">
 
   <div class="disc-heading">
-
-    <h2>
-      DISC 1
-    </h2>
-
-    <span>
-      BLUE SKY
-    </span>
-
+    <h2>DISC 1</h2>
+    <span>BLUE SKY</span>
   </div>
 
-
   <div id="tracks1"></div>
-
 
 </section>
 
 
-<!-- =====================================
-     DISC 2
-===================================== -->
-
-<section
-  id="disc2"
-  class="disc-panel"
->
-
+<section id="disc2" class="disc-panel">
 
   <div class="disc-heading">
-
-    <h2>
-      DISC 2
-    </h2>
-
-    <span>
-      ORANGE SKY
-    </span>
-
+    <h2>DISC 2</h2>
+    <span>ORANGE SKY</span>
   </div>
 
-
   <div id="tracks2"></div>
-
 
 </section>
 
 
 <footer>
-
   NIGO's AI Sound Collection
-
 </footer>
-
 
 </div>
 
 
 <script>
 
-
-/* =====================================
-   DISC 1 DATA
-===================================== */
+/* ================================
+   DISC 1
+================================ */
 
 const disc1 = [
 
-  {
-    no: "01",
-    title: "ログアウト絆",
-    time: "4:10",
-    id: "110M3VLjU8cc7SMSdJXO8HuztFsjiKhFJ"
-  },
-
-  {
-    no: "02",
-    title: "夏が呼んでる",
-    time: "3:43",
-    id: "1DeCMgECUa4Op-V_g326CUdahJav0Qss6"
-  },
-
-  {
-    no: "03",
-    title: "いつもの話",
-    time: "2:57",
-    id: "1s8BmjdXsEJr7yZoK3k8p4ajgVXZ6hIRy"
-  },
-
-  {
-    no: "04",
-    title: "Empathy",
-    time: "3:42",
-    id: "1bL94B0ufGciH-2Tc3jUi6gY6U9h278oX"
-  },
-
-  {
-    no: "05",
-    title: "唐揚げ食べよう",
-    time: "2:13",
-    id: "1-D6PBAyYFhMDuH-c_fCPFZ8gN3fyUr0K"
-  },
-
-  {
-    no: "06",
-    title: "百折不撓～HYAKUSETSU HUTOU～",
-    time: "4:46",
-    id: "1sCsw4-orIh9Kdhr6mNxYMrc14H-N7YHN"
-  },
-
-  {
-    no: "07",
-    title: "精算☆カリメロディ♪",
-    time: "3:21",
-    id: "1GqU3IWnsUL1NEogPYMs5EcuhZBOcjQYy"
-  },
-
-  {
-    no: "08",
-    title: "閉ざされた街で",
-    time: "4:38",
-    id: "1eFCmr6Mn36ONL0-60K6_Xw6XNNEejRWu"
-  },
-
-  {
-    no: "09",
-    title: "オフ会しようぜ",
-    time: "4:03",
-    id: "13qR8ehUYnVNbgvtddJuBKDBegsw1dYpB"
-  },
-
-  {
-    no: "10",
-    title: "Delicate & Bold",
-    time: "2:34",
-    id: "1cO614pwnGamBog8Dp_72oRUQlA5E6yHz"
-  },
-
-  {
-    no: "11",
-    title: "贈られた言葉",
-    time: "4:29",
-    id: "1qhfmMkBtknU6gx927qHPfHZYdkXRkB1A"
-  },
-
-  {
-    no: "12",
-    title: "ここにあるBIG LOVE",
-    time: "4:04",
-    id: "1Co4AC4gZ18AGw548hFSxqFw1yOGUqYuW"
-  },
-
-  {
-    no: "13",
-    title: "夢のリズム",
-    time: "3:54",
-    id: "15a9xzfHtUKkI9XBQBY_QWljh0uLa5kyT"
-  },
-
-  {
-    no: "14",
-    title: "リトラッシュ!!(Retry Rush)",
-    time: "2:40",
-    id: "1tPP97vRuqbk60MHBfNYEusS39EOWZDuI"
-  },
-
-  {
-    no: "15",
-    title: "ポジティブでいこう",
-    time: "3:25",
-    id: "1_ZOK6kORNgEzJg2fJzkVqAlr4k4Feb8Z"
-  },
-
-  {
-    no: "16",
-    title: "Nice Good friends",
-    time: "3:25",
-    id: "1_8J4H1-1-bdfQ7NhX0Ks5nHlYsyLedOT"
-  },
-
-  {
-    no: "★",
-    title: "YAKEKUSO☆",
-    time: "1:41",
-    id: "1Pmr087_IZUVQFqOC8U6XqKIuVg0OwfAV",
-    bonus: true
-  }
+["01","ログアウト絆","4:10","110M3VLjU8cc7SMSdJXO8HuztFsjiKhFJ"],
+["02","夏が呼んでる","3:43","1DeCMgECUa4Op-V_g326CUdahJav0Qss6"],
+["03","いつもの話","2:57","1s8BmjdXsEJr7yZoK3k8p4ajgVXZ6hIRy"],
+["04","Empathy","3:42","1bL94B0ufGciH-2Tc3jUi6gY6U9h278oX"],
+["05","唐揚げ食べよう","2:13","1-D6PBAyYFhMDuH-c_fCPFZ8gN3fyUr0K"],
+["06","百折不撓～HYAKUSETSU HUTOU～","4:46","1sCsw4-orIh9Kdhr6mNxYMrc14H-N7YHN"],
+["07","精算☆カリメロディ♪","3:21","1GqU3IWnsUL1NEogPYMs5EcuhZBOcjQYy"],
+["08","閉ざされた街で","4:38","1eFCmr6Mn36ONL0-60K6_Xw6XNNEejRWu"],
+["09","オフ会しようぜ","4:03","13qR8ehUYnVNbgvtddJuBKDBegsw1dYpB"],
+["10","Delicate & Bold","2:34","1cO614pwnGamBog8Dp_72oRUQlA5E6yHz"],
+["11","贈られた言葉","4:29","1qhfmMkBtknU6gx927qHPfHZYdkXRkB1A"],
+["12","ここにあるBIG LOVE","4:04","1Co4AC4gZ18AGw548hFSxqFw1yOGUqYuW"],
+["13","夢のリズム","3:54","15a9xzfHtUKkI9XBQBY_QWljh0uLa5kyT"],
+["14","リトラッシュ!!(Retry Rush)","2:40","1tPP97vRuqbk60MHBfNYEusS39EOWZDuI"],
+["15","ポジティブでいこう","3:25","1_ZOK6kORNgEzJg2fJzkVqAlr4k4Feb8Z"],
+["16","Nice Good friends","3:25","1_8J4H1-1-bdfQ7NhX0Ks5nHlYsyLedOT"],
+["★","YAKEKUSO☆","1:41","1Pmr087_IZUVQFqOC8U6XqKIuVg0OwfAV",true]
 
 ];
 
 
-/* =====================================
-   DISC 2 DATA
-===================================== */
+/* ================================
+   DISC 2
+================================ */
 
 const disc2 = [
 
-  {
-    no: "01",
-    title: "Everybody NIGO Party！",
-    time: "3:45",
-    id: "1EnK0ysZgo7fFH_W4_8d6Gv0-kvPfeEml"
-  },
-
-  {
-    no: "02",
-    title: "限界シャウト",
-    time: "4:16",
-    id: "1g9a35ZBH93zSwWU7OXNdy8EFmWmpaPtv"
-  },
-
-  {
-    no: "03",
-    title: "無理しないで",
-    time: "5:07",
-    id: "1AAKSYbb2MPjoGpSsDnNdxWlzXWoUjFHt"
-  },
-
-  {
-    no: "04",
-    title: "YOFUKASHI",
-    time: "4:13",
-    id: "1MV-HYlfn80OEyFWHdLjOTbbfV1uN-dtJ"
-  },
-
-  {
-    no: "05",
-    title: "君とSummerVoyage",
-    time: "4:49",
-    id: "1RT62fNP1POeP6uPGVoIeQEYFjtRx1Mze"
-  },
-
-  {
-    no: "06",
-    title: "JUMP OUT！",
-    time: "3:25",
-    id: "16Q7cN05-JZc8DGqlQZQ3gCFm1VvFCnsx"
-  },
-
-  {
-    no: "07",
-    title: "おちゃんちん",
-    time: "2:47",
-    id: "1-7-Iba8ABKVC1AZhDBK5C33EHG6d1Wuk"
-  },
-
-  {
-    no: "08",
-    title: "サイバーロケットジェットファイア！",
-    time: "4:13",
-    id: "1GN1xmXWB5C10GwK-9QuUWqXpKbGnI9Yp"
-  },
-
-  {
-    no: "09",
-    title: "繊細",
-    time: "5:15",
-    id: "16GkWNhW-bXo3_8p1XAjcEBH6UXMwn7Qm"
-  },
-
-  {
-    no: "10",
-    title: "MAIDO EVERY NIGHT",
-    time: "3:10",
-    id: "1Ybw33dO_hOysxnRkOV3BxWj3Y5gzP7Lm"
-  },
-
-  {
-    no: "11",
-    title: "Don’t expect 99",
-    time: "3:03",
-    id: "15z4oilvYGCkMTPculdYRU-I9hdJY1YCk"
-  },
-
-  {
-    no: "12",
-    title: "Winter Lovers",
-    time: "4:08",
-    id: "1h_UVskpqUPh37jJDQiDj3EuatlTaHhDB"
-  },
-
-  {
-    no: "13",
-    title: "踊れ黙示録",
-    time: "3:17",
-    id: "1QyxywHXMGXnPcKqLJYQH-ydWX_D4DVNQ"
-  },
-
-  {
-    no: "14",
-    title: "明日の風",
-    time: "3:54",
-    id: "1Js6P0RSjU_936GJDGWAoMxL0DcLJs5qR"
-  },
-
-  {
-    no: "15",
-    title: "DESIRE",
-    time: "4:19",
-    id: "1KgjauNW2etoijri8UKSZx5k9e_5GpFy3"
-  },
-
-  {
-    no: "16",
-    title: "This is your life！",
-    time: "4:03",
-    id: "1M4ghxqmd8URp4R1EaPhpx8yAJOEJg7pG"
-  },
-
-  {
-    no: "★",
-    title: "ふらっぐ ゴスペルver.",
-    time: "3:44",
-    id: "13eCxh3g6lmHAD0j7DW2aOJyBfo4pe64d",
-    bonus: true
-  }
+["01","Everybody NIGO Party！","3:45","1EnK0ysZgo7fFH_W4_8d6Gv0-kvPfeEml"],
+["02","限界シャウト","4:16","1g9a35ZBH93zSwWU7OXNdy8EFmWmpaPtv"],
+["03","無理しないで","5:07","1AAKSYbb2MPjoGpSsDnNdxWlzXWoUjFHt"],
+["04","YOFUKASHI","4:13","1MV-HYlfn80OEyFWHdLjOTbbfV1uN-dtJ"],
+["05","君とSummerVoyage","4:49","1RT62fNP1POeP6uPGVoIeQEYFjtRx1Mze"],
+["06","JUMP OUT！","3:25","16Q7cN05-JZc8DGqlQZQ3gCFm1VvFCnsx"],
+["07","おちゃんちん","2:47","1-7-Iba8ABKVC1AZhDBK5C33EHG6d1Wuk"],
+["08","サイバーロケットジェットファイア！","4:13","1GN1xmXWB5C10GwK-9QuUWqXpKbGnI9Yp"],
+["09","繊細","5:15","16GkWNhW-bXo3_8p1XAjcEBH6UXMwn7Qm"],
+["10","MAIDO EVERY NIGHT","3:10","1Ybw33dO_hOysxnRkOV3BxWj3Y5gzP7Lm"],
+["11","Don’t expect 99","3:03","15z4oilvYGCkMTPculdYRU-I9hdJY1YCk"],
+["12","Winter Lovers","4:08","1h_UVskpqUPh37jJDQiDj3EuatlTaHhDB"],
+["13","踊れ黙示録","3:17","1QyxywHXMGXnPcKqLJYQH-ydWX_D4DVNQ"],
+["14","明日の風","3:54","1Js6P0RSjU_936GJDGWAoMxL0DcLJs5qR"],
+["15","DESIRE","4:19","1KgjauNW2etoijri8UKSZx5k9e_5GpFy3"],
+["16","This is your life！","4:03","1M4ghxqmd8URp4R1EaPhpx8yAJOEJg7pG"],
+["★","ふらっぐ ゴスペルver.","3:44","13eCxh3g6lmHAD0j7DW2aOJyBfo4pe64d",true]
 
 ];
 
 
-/* =====================================
-   CREATE TRACK
-===================================== */
+/* ================================
+   TRACK CREATION
+================================ */
 
-function createTrack(track) {
+function createTrack(track){
+
+  const no=track[0];
+  const title=track[1];
+  const time=track[2];
+  const id=track[3];
+  const bonus=track[4];
 
   const listenURL =
     "https://drive.google.com/file/d/" +
-    track.id +
+    id +
     "/view?usp=drive_link";
 
-
+  /*
+   * Google Driveのダウンロード用URL
+   */
   const downloadURL =
-    "https://drive.google.com/uc?export=download&id=" +
-    track.id;
+    "https://drive.usercontent.google.com/download?id=" +
+    id +
+    "&export=download&confirm=t";
 
+  const div=document.createElement("div");
 
-  const div =
-    document.createElement("div");
+  div.className=bonus ? "track bonus" : "track";
 
-
-  div.className =
-    track.bonus
-      ? "track bonus"
-      : "track";
-
-
-  div.innerHTML = `
+  div.innerHTML=`
 
     <span class="track-number">
-      ${track.no}
+      ${no}
     </span>
-
 
     <span class="track-title">
-
-      ${track.title}
-
+      ${title}
       <span class="track-time">
-        ${track.time}
+        ${time}
       </span>
-
     </span>
-
 
     <div class="track-actions">
 
@@ -1373,12 +550,12 @@ function createTrack(track) {
         ▶ LISTEN
       </a>
 
-
       <a
         class="btn download"
         href="${downloadURL}"
         target="_blank"
         rel="noopener"
+        download
       >
         ↓ DOWNLOAD
       </a>
@@ -1387,125 +564,83 @@ function createTrack(track) {
 
   `;
 
-
   return div;
-
 }
 
 
-/* =====================================
-   RENDER
-===================================== */
+/* ================================
+   RENDER TRACKS
+================================ */
 
-function renderTracks() {
+function renderTracks(){
 
-  const container1 =
-    document.getElementById("tracks1");
+  const c1=document.getElementById("tracks1");
+  const c2=document.getElementById("tracks2");
 
-  const container2 =
-    document.getElementById("tracks2");
-
-
-  disc1.forEach(track => {
-
-    container1.appendChild(
-      createTrack(track)
-    );
-
+  disc1.forEach(track=>{
+    c1.appendChild(createTrack(track));
   });
 
-
-  disc2.forEach(track => {
-
-    container2.appendChild(
-      createTrack(track)
-    );
-
+  disc2.forEach(track=>{
+    c2.appendChild(createTrack(track));
   });
 
 }
 
 
-/* =====================================
+/* ================================
    DISC SWITCH
-===================================== */
+================================ */
 
-function showDisc(number) {
-
+function showDisc(number){
 
   document
     .querySelectorAll(".disc-panel")
-    .forEach(panel => {
-
+    .forEach(panel=>{
       panel.classList.remove("active");
-
     });
-
 
   document
     .querySelectorAll(".disc-tab")
-    .forEach(tab => {
-
+    .forEach(tab=>{
       tab.classList.remove("active");
-
     });
 
-
   document
-    .getElementById("disc" + number)
+    .getElementById("disc"+number)
     .classList.add("active");
 
-
   document
-    .querySelectorAll(".disc-tab")[number - 1]
+    .querySelectorAll(".disc-tab")[number-1]
     .classList.add("active");
 
+  document.body.className="disc"+number;
 
-  document.body.className =
-    "disc" + number;
+  const jacket=document.getElementById("jacketImage");
 
+  if(number===1){
 
-  const jacket =
-    document.getElementById("jacketImage");
+    jacket.src="disc1.jpg";
+    jacket.alt="NIGO's AI Sound Collection DISC 1";
 
+  }else{
 
-  if (number === 1) {
-
-    jacket.src =
-      "disc1.jpg";
-
-    jacket.alt =
-      "NIGO's AI Sound Collection DISC 1";
+    jacket.src="disc2.jpg";
+    jacket.alt="NIGO's AI Sound Collection DISC 2";
 
   }
-
-  else {
-
-    jacket.src =
-      "disc2.jpg";
-
-    jacket.alt =
-      "NIGO's AI Sound Collection DISC 2";
-
-  }
-
 
   window.scrollTo({
-
-    top:
-      0,
-
-    behavior:
-      "smooth"
-
+    top:0,
+    behavior:"smooth"
   });
 
 }
 
 
-/* =====================================
+/* ================================
    START
-===================================== */
+================================ */
 
 renderTracks();
 
