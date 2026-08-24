@@ -38,8 +38,8 @@ body {
 
 
 /* ========================================
-   BACKGROUND LAYERS
-   青空 → オレンジ空をクロスフェード
+   BACKGROUND
+   青空 → オレンジ空 クロスフェード
 ======================================== */
 
 body::before,
@@ -47,11 +47,12 @@ body::after {
   content: "";
   position: fixed;
   inset: 0;
-  z-index: -2;
   pointer-events: none;
 }
 
 body::before {
+  z-index: -2;
+
   background:
     linear-gradient(
       180deg,
@@ -63,6 +64,8 @@ body::before {
 }
 
 body::after {
+  z-index: -1;
+
   background:
     linear-gradient(
       180deg,
@@ -71,10 +74,11 @@ body::after {
       #ffd79b 72%,
       #fff0d5 100%
     );
+
   opacity: 0;
-  z-index: -1;
+
   transition:
-    opacity 2.2s cubic-bezier(
+    opacity 1.6s cubic-bezier(
       0.4,
       0,
       0.2,
@@ -111,8 +115,9 @@ body.switching::before {
   opacity: 0;
 
   animation:
-    skyLight 1.8s ease;
+    skyLight 1.6s ease;
 }
+
 
 @keyframes skyLight {
 
@@ -1656,7 +1661,7 @@ function showDisc(number) {
 
 
   /* ==================================
-     TRANSITION START
+     START TRANSITION
   ================================== */
 
   document.body.classList.add(
@@ -1664,15 +1669,10 @@ function showDisc(number) {
   );
 
 
-  /*
-     ジャケット
-
-     DISC 1 → DISC 2
-     左へスライド
-
-     DISC 2 → DISC 1
-     右へスライド
-  */
+  /* ==================================
+     JACKET SLIDE
+     0.4秒
+  ================================== */
 
   if (number === 2) {
 
@@ -1689,15 +1689,10 @@ function showDisc(number) {
   }
 
 
-  /*
-     背景
-
-     disc1 → disc2
-
-     DISC 2用背景レイヤーの
-     opacityが2.2秒かけて
-     0 → 1になる
-  */
+  /* ==================================
+     BACKGROUND CROSSFADE
+     1.6秒
+  ================================== */
 
   document.body.classList.toggle(
     "disc2",
@@ -1706,7 +1701,7 @@ function showDisc(number) {
 
 
   /* ==================================
-     PANEL
+     CHANGE DISC PANEL
   ================================== */
 
   setTimeout(() => {
@@ -1763,7 +1758,8 @@ function showDisc(number) {
 
 
   /* ==================================
-     TRANSITION END
+     END TRANSITION
+     1.6秒
   ================================== */
 
   setTimeout(() => {
@@ -1774,7 +1770,7 @@ function showDisc(number) {
 
     switching = false;
 
-  }, 2200);
+  }, 1600);
 
 }
 
